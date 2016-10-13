@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   height: 100, // Default height of canvas
   tagName: 'canvas', // This component by default takes `canvas data`
   attributeBindings: ['width', 'height'],
-  setupPieChart: Ember.on('didInsertElement', function() {
+  drawPieChart: Ember.observer('data', function() {
     var ctx = this.element.getContext("2d"),
       data = this.get("data"),
       width = this.get("width"),
@@ -21,7 +21,8 @@ export default Ember.Component.extend({
       i = 0,
       l = 0,
       item = null;
-
+    //Clear the canvas
+    ctx.clearRect(0, 0, width, height);
     /*
      * Let the smallest center be the radius to comtain the entire pie chart
      * within the canvas
