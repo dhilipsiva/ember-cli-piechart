@@ -47,9 +47,19 @@ export default Ember.Component.extend({
       item = data[i];
       currentAngle = fullAngle * (item.value / totalValue);
 
+      // Outer lighter Circle
       ctx.beginPath();
       ctx.fillStyle = item.color;
+      ctx.globalAlpha = 0.5;
       ctx.arc(center_x, center_y, radius, lastAngle, lastAngle + currentAngle);
+      ctx.lineTo(center_x, center_y);
+      ctx.fill();
+
+      // Inner darker circle
+      ctx.beginPath();
+      ctx.fillStyle = item.color;
+      ctx.globalAlpha = 1;
+      ctx.arc(center_x, center_y, radius * 0.8, lastAngle, lastAngle + currentAngle);
       ctx.lineTo(center_x, center_y);
       ctx.fill();
 
