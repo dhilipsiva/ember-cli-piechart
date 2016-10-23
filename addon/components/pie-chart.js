@@ -5,12 +5,16 @@ export default Ember.Component.extend({
   width: 100, // Default width of canvas
   height: 100, // Default height of canvas
   tagName: 'canvas', // This component by default takes `canvas data`
+  globalAlpha: 0.5, // This is to make the outer lighter / darker.
+  radiusRatio: 0.8, // raitio of `<outer circle>:<inner circle>`
   attributeBindings: ['width', 'height'],
   drawPieChart: Ember.observer('data', function() {
     var ctx = this.element.getContext("2d"),
       data = this.get("data"),
       width = this.get("width"),
       height = this.get("height"),
+      globalAlpha = this.get("globalAlpha"),
+      radiusRatio = this.get("radiusRatio"),
       fullAngle = Math.PI * 2, // i.e 360 Deg
       lastAngle = - Math.PI / 2, // This is 12'o clock. `0` Deg 3'0 clock
       currentAngle = 0, // This angle respective of the current value
@@ -50,7 +54,7 @@ export default Ember.Component.extend({
       // Outer lighter Circle
       ctx.beginPath();
       ctx.fillStyle = item.color;
-      ctx.globalAlpha = 0.5;
+      ctx.globalAlpha = globalAlpha;
       ctx.arc(center_x, center_y, radius, lastAngle, lastAngle + currentAngle);
       ctx.lineTo(center_x, center_y);
       ctx.fill();
@@ -59,7 +63,7 @@ export default Ember.Component.extend({
       ctx.beginPath();
       ctx.fillStyle = item.color;
       ctx.globalAlpha = 1;
-      ctx.arc(center_x, center_y, radius * 0.8, lastAngle, lastAngle + currentAngle);
+      ctx.arc(center_x, center_y, radius * radiusRatio, lastAngle, lastAngle + currentAngle);
       ctx.lineTo(center_x, center_y);
       ctx.fill();
 
