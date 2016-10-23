@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-piechart",
-  "version": "0.3.2-pre",
+  "version": "0.3.2",
   "description": "A very simple Canvas based Ember CLI addon for creating pie charts",
   "directories": {
     "doc": "doc",
