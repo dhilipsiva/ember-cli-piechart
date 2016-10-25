@@ -25,6 +25,11 @@ export default Ember.Component.extend({
       i = 0,
       l = 0,
       item = null;
+
+    if (data === null) {
+      return
+    }
+
     //Clear the canvas
     ctx.clearRect(0, 0, width, height);
     /*
