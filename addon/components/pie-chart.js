@@ -8,7 +8,8 @@ export default Ember.Component.extend({
   globalAlpha: 0.5, // This is to make the outer lighter / darker.
   radiusRatio: 0.8, // raitio of `<outer circle>:<inner circle>`
   attributeBindings: ['width', 'height'],
-  drawPieChart: Ember.observer('data', function() {
+
+  drawPieChart: function() {
     var ctx = this.element.getContext("2d"),
       data = this.get("data"),
       width = this.get("width"),
@@ -74,5 +75,14 @@ export default Ember.Component.extend({
 
       lastAngle += currentAngle;
     }
+  },
+
+  dataObserver: Ember.observer('data', function(){
+    this.drawPieChart()
+  }),
+
+  onDidInsertElement: Ember.on('didInsertElement', function(){
+    this.drawPieChart()
   })
+
 });
