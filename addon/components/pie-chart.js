@@ -27,7 +27,7 @@ export default Ember.Component.extend({
       l = 0,
       item = null;
 
-    if (data === null) {
+    if (Ember.isEmpty(data)) {
       return
     }
 
